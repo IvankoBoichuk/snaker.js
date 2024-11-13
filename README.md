@@ -1,6 +1,7 @@
 
 # snaker.js
 Visualize connections between elements with lines.
+[Demo](https://ivankoboichuk.github.io/snaker.js/)
  ---
 The `snaker.js` module allows you to create connections in the form of lines between blocks on a webpage. The lines can be drawn either using `canvas` or `SVG`, providing flexibility and performance depending on your project requirements. The lines automatically adjust to the position and size of the blocks they connect.
 #### Key Features:
