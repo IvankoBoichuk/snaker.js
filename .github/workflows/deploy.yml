@@ -1,24 +1,25 @@
-name: Deploy
+name: Deploy Vite Project
 
 on:
   push:
     branches:
-      - main
+      - main  # Виконується при кожному push до гілки main (змінити за потреби)
 
 jobs:
   build:
-    name: Build
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup Node
+      - name: Set up Node.js
         uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Вкажіть версію Node.js для проєкту
 
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: npm ci # Використовується ci для швидшої установки (або npm install)
 
       - name: Build project
         run: npm run build
@@ -26,24 +27,11 @@ jobs:
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v3
         with:
-          name: production-files
-          path: ./dist
-
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: production-files
-          path: ./dist
+          name: build
+          path: dist  # Укажіть шлях до папки, де Vite зберігає зібрані файли
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: dist
