@@ -19,6 +19,7 @@ class Snaker {
         this.canvas.style.position = "absolute";
         this.canvas.style.top = 0;
         this.canvas.style.left = 0;
+        this.canvas.style.zIndex = -1;
         this.container.appendChild(this.canvas);
 
         this.flow();
