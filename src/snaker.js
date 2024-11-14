@@ -8,6 +8,7 @@ class Snaker {
             strokeStyle: options.strokeStyle || "#ccc",
             lineWidth: options.lineWidth || 2,
             rounded: options.rounded || 0,
+            borderStyle: options.borderStyle || "solid", // New option for border style
         };
 
         this.init();
@@ -40,6 +41,13 @@ class Snaker {
         // Налаштування стилю лінії
         ctx.strokeStyle = this.options.strokeStyle;
         ctx.lineWidth = this.options.lineWidth;
+
+        // Set line dash pattern based on borderStyle
+        if (this.options.borderStyle === "dashed") {
+            ctx.setLineDash([5, 5]); // Adjust dash pattern as needed
+        } else {
+            ctx.setLineDash([]); // Solid line
+        }
 
         ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
